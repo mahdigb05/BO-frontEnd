@@ -1,26 +1,24 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import LoginForm from './Components/Login-Components/LoginForm';
+import {BrowserRouter, Route} from 'react-router-dom'
+import ListCourriers from './Components/Data-Display-Components/listCourriers';
+import UtilisateurContextProvider from './Components/contexts/UtilisateurContext'
+import CourrierContextProvider from './Components/contexts/CourrierContext';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<BrowserRouter>
+				<UtilisateurContextProvider>
+					<div className="App">
+						<Route exact path='/login' component={LoginForm} />
+						<CourrierContextProvider>
+							<Route exact path='/list-courrier' component={ListCourriers} />
+						</CourrierContextProvider>
+					</div>
+				</UtilisateurContextProvider>
+		</BrowserRouter>
+	);
 }
 
 export default App;
